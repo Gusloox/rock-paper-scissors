@@ -1,0 +1,1 @@
+Created a fun project about rock, paper, scissors that uses vanilla javascript for input and output.
