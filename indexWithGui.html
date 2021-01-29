@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Rock Paper Scissors</title>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <div id="container">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+
+    </div>
+
+    <script>
+        const buttons = document.querySelectorAll('button');
+        const div = document.createElement('div');
+        const container = document.querySelector('#container');
+        container.appendChild(div);
+        const p = document.createElement('p');
+        const p_score = document.createElement('h3');
+
+        let playerCounter = 0, computerCounter = 0;
+        div.appendChild(p);
+        div.appendChild(p_score);
+        buttons.forEach((button) => {
+
+            button.addEventListener('click', function (e) {
+                p.textContent = playRound(button.innerText, computerPlay());
+                p_score.textContent = "player: " + playerCounter + " " + "computer: " + computerCounter;
+            });
+            
+        });
+
+
+        function playRound(playerSelection, computerSelection) {
+            if (playerCounter == 5 || computerCounter == 5) {
+                if (playerCounter == 5) {
+                    alert("player wins");
+                } else if (computerCounter == 5 && playerCounter==5) {
+                    alert("no one wins");
+                }else{
+                    alert("computer wins");
+                }
+                playerCounter = 0;
+                computerCounter = 0;
+            }
+            if (playerSelection == "rock" || playerSelection == "Rock" || playerSelection == "ROCK") {
+                if (computerSelection == "rock") {
+                    ++playerCounter;
+                    ++computerCounter;
+                    return "Equals";
+                }
+                else if (computerSelection == "paper") {
+                    ++computerCounter;
+                    return "Rock Loses To Paper";
+                } else {
+                    ++playerCounter;
+                    return "Rock Beats Scissors";
+                }
+            } else if (playerSelection == "paper" || playerSelection == "Paper" || playerSelection == "PAPER") {
+                if (computerSelection == "rock") {
+                    ++playerCounter;
+                    return "Paper Wins Rock";
+                }
+                else if (computerSelection == "paper") {
+                    ++playerCounter;
+                    ++computerCounter;
+                    return "Equals";
+                } else {
+                    ++computerCounter;
+                    return "Paper Loses To Scissors";
+                }
+            } else {
+                if (computerSelection == "rock") {
+                    ++computerCounter;
+                    return "Scissors Lose Rock";
+                }
+                else if (computerSelection == "paper") {
+                    ++playerCounter;
+                    return "Scissors Win Paper";
+                } else {
+                    ++playerCounter;
+                    ++computerCounter;
+                    return "Equals";
+                }
+            }
+
+        }
+        function computerPlay() { //computer generates a random answer.
+            let random = ["rock", "paper", "scissors"];
+            return random[Math.floor(Math.random() * 3)];
+
+        }
+
+    //     function game(){
+    //     for(i=0;i<5;i++){
+    //       console.log(playRound(playerSelection,computerPlay()));
+    //     }
+    // }
+    // game();
+    </script>
+
+</body>
+
+</html>
